@@ -1,13 +1,22 @@
 package hello.core.order;
 
+import hello.core.AppConfig;
 import hello.core.member.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class OrderServiceTest {
-    private final MemberService memberSvc = new MemberServiceImpl();
-    private final OrderService orderSvc = new OrderServiceImpl();
+    private MemberService memberSvc;
+    private OrderService orderSvc;
+
+    @BeforeEach
+    public void prepare() {
+        AppConfig config = new AppConfig();
+        memberSvc = config.memberService();
+        orderSvc = config.orderService();
+    }
 
     @Test
     public void createVIPOrder() {

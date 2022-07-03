@@ -21,21 +21,27 @@ public class AppConfig {
     // 메서드이름을 기본 빈 이름으로 사용함
     @Bean
     public MemberService memberService() {
+        System.out.println("call AppConfig memberService");
         return new MemberServiceImpl(memberRepository());
     }
 
     @Bean
     public MemberRepository memberRepository() {
+        // 자바 코드로만 보면 3번 호출되야할 거 같은데 1번만 호출된다.
+        // 비밀은 @Configuration
+        System.out.println("call AppConfig memberRepository");
         return new MemoryMemberRepository();
     }
 
     @Bean
     public OrderService orderService() {
+        System.out.println("call AppConfig orderService");
         return new OrderServiceImpl(memberRepository(), discountPolicy());
     }
 
     @Bean
     public DiscountPolicy discountPolicy() {
+        System.out.println("call AppConfig discountPolicy");
         return new FixDiscountPolicy();
 //        return new RateDiscountPolicy();
     }

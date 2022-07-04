@@ -3,9 +3,11 @@ package hello.core.order;
 import hello.core.discount.DiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
 //    private final MemberRepository memberRepo = new MemoryMemberRepository();
     private final MemberRepository memberRepo;
@@ -16,10 +18,11 @@ public class OrderServiceImpl implements OrderService {
 
     private final DiscountPolicy discountPolicy;
 
-    public OrderServiceImpl(MemberRepository memberRepo, DiscountPolicy discountPolicy) {
-        this.memberRepo = memberRepo;
-        this.discountPolicy = discountPolicy;
-    }
+    // lombok 의 @RequiredArgsConstructor 로 대체하면 더 편리하다.
+//    public OrderServiceImpl(MemberRepository memberRepo, DiscountPolicy discountPolicy) {
+//        this.memberRepo = memberRepo;
+//        this.discountPolicy = discountPolicy;
+//    }
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
